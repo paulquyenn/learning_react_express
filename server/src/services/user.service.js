@@ -22,3 +22,29 @@ export const registerService = async (name, email, password) => {
     return null;
   }
 };
+
+export const loginService = async (email, password) => {
+  try {
+    // fetch user by email
+    const user = await User.findOne({ email: email });
+
+    if (user) {
+      const comparePassword = await bcrypt.compare(password, user.password);
+      if (!comparePassword) {
+        return {
+          EC: 2,
+          EM: "email or password not invalid",
+        };
+      } else {
+        return "access token";
+      }
+    } else {
+      return {
+        EC: 1,
+        EM: "email or password not invalid ",
+      };
+    }
+  } catch (error) {
+    console.error(`[ERROR] Login service: ${error}`);
+  }
+};
