@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import axios from "./utils/axios.customize";
+import Header from "./components/layouts/Header";
+import { Outlet } from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -13,7 +15,8 @@ function App() {
 
   return (
     <>
-      <div>Hello world</div>
+      <Header />
+      <Outlet />
     </>
   );
 }
