@@ -47,7 +47,11 @@ export const loginService = async (email, password) => {
           expiresIn: process.env.JWT_EXPIRE,
         });
 
-        return { accessToken, user: { name: user.name, email: user.email } };
+        return {
+          EC: 0,
+          accessToken,
+          user: { name: user.name, email: user.email },
+        };
       }
     } else {
       return {
