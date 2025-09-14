@@ -1,5 +1,7 @@
+require("dotenv").config();
 import User from "../models/user.model";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const saltRounds = 10;
 
@@ -36,7 +38,16 @@ export const loginService = async (email, password) => {
           EM: "email or password not invalid",
         };
       } else {
-        return "access token";
+        const payload = {
+          name: user.name,
+          email: user.email,
+        };
+
+        const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: process.env.JWT_EXPIRE,
+        });
+
+        return { accessToken, user: { name: user.name, email: user.email } };
       }
     } else {
       return {
