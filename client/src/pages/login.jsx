@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Form, Input, notification } from "antd";
 import { login } from "../utils/authApi";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../components/context/auth.context";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
 
   const onFinish = async (values) => {
     const { email, password } = values;
@@ -17,6 +19,13 @@ export default function Login() {
         message: "login user",
         description: "successfully",
       });
+      setAuth({
+        isAuthenticated: true,
+        user: {
+          name: res?.user?.name ?? "",
+          email: res?.user?.email ?? "",
+        },
+      });
       navigate("/");
     } else {
       notification.error({
@@ -24,8 +33,6 @@ export default function Login() {
         description: res?.EM ?? "failed",
       });
     }
-
-    console.log("[LOG] Success:", res);
   };
 
   return (

@@ -7,6 +7,7 @@ import Register from "./pages/register.jsx";
 import User from "./pages/user.jsx";
 import Home from "./pages/home.jsx";
 import Login from "./pages/login.jsx";
+import { AuthWrapper } from "./components/context/auth.context.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthWrapper>
+      <RouterProvider router={router} />
+    </AuthWrapper>
   </StrictMode>
 );
