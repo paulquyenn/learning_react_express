@@ -2,7 +2,7 @@ import User from "../models/user.model";
 
 export const getAllUserService = async () => {
   try {
-    const result = await User.find({});
+    const result = await User.find({}).select("-password");
 
     return result;
   } catch (error) {
