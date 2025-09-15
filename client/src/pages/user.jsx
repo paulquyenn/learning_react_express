@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { notification, Table } from "antd";
 import { useEffect, useState } from "react";
 import { getAllUserApi } from "../utils/userApi";
 
@@ -9,8 +9,13 @@ export default function User() {
     const fetchAllUser = async () => {
       const res = await getAllUserApi();
 
-      if (res) {
+      if (!res.message) {
         setDataSource(res);
+      } else {
+        notification.error({
+          message: "Unauthorized",
+          description: res.message,
+        });
       }
     };
     fetchAllUser();

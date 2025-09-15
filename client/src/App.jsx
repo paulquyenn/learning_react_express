@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "@ant-design/v5-patch-for-react-19";
 import axios from "./utils/axios.customize";
 import Header from "./components/layouts/Header";
 import { Outlet } from "react-router-dom";
