@@ -15,3 +15,7 @@ export const login = async (req, res) => {
 
   return res.status(200).json(data);
 };
+
+export const getMe = async (req, res) => {
+  return res.status(200).json(req.user);
+};
